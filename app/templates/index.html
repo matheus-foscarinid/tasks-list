@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Lista de Tarefas</h1>
+    <form method="post" action="/add" class="add-form">
+      <input type="text" name="task" placeholder="Nova tarefa" required>
+      <button type="submit">Adicionar</button>
+    </form>
+    <div class="tasks-list">
+      {% for task in tasks %}
+      <div class="task-card">
+        <form method="post" action="/toggle/{{ task.id }}" style="display:inline;">
+          <input type="checkbox" {% if task.done %}checked{% endif %} onchange="this.form.submit()">
+        </form>
+        <span>{{ task.description }}</span>
+        <div class="actions">
+          <form method="get" action="/edit/{{ task.id }}" style="display:inline;">
+            <button class="edit-btn" type="submit">Editar</button>
+          </form>
+          <form method="post" action="/delete/{{ task.id }}" style="display:inline;">
+            <button class="delete-btn" type="submit">Excluir</button>
+          </form>
+        </div>
+      </div>
+      {% else %}
+      <li>Nenhuma tarefa encontrada...</li>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>
