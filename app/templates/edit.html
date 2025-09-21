@@ -1,18 +1,24 @@
+<!-- Matheus Foscarini Dias -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <title>Editar Tarefa</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
-  <h1>Editar Tarefa</h1>
-  <form method="post">
-    <input type="text" name="description" value="{{ task.description }}" required>
-    <button type="submit">Salvar</button>
-    <a href="/">Cancelar</a>
-  </form>
+  <div class="container">
+    <h1>Editar Tarefa</h1>
+    <form method="post" class="update-form">
+      <input type="text" name="description" value="{{ task.description }}" required>
+      <div class="buttons">
+        <button type="submit">Salvar</button>
+        <a href="/" class="cancel-btn">Cancelar</a>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
